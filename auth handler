@@ -1,0 +1,5 @@
+const token = window.location.hash.split("token=")[1];
+
+if (token) {
+  localStorage.setItem("token", token);
+}
