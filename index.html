@@ -1,208 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kaelion Global Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./assets/style.css" />
-  </head>
-  <body>
-    <div class="bg-orb bg-orb-1"></div>
-    <div class="bg-orb bg-orb-2"></div>
+<head>
+  <meta charset="UTF-8">
+  <title>Kaelion Dashboard</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
 
-    <main class="shell">
-      <aside class="sidebar glass">
-        <div class="brand">
-          <div class="brand-mark">K</div>
-          <div>
-            <h1 id="dashboardTitle">Kaelion Global Dashboard</h1>
-            <p>Multi-server control panel</p>
-          </div>
-        </div>
+<h1>Kaelion Dashboard</h1>
 
-        <div class="user-card" id="userCard">
-          <div class="user-avatar" id="userAvatar">?</div>
-          <div>
-            <strong id="userName">Not logged in</strong>
-            <span id="userMeta">Connect with Discord</span>
-          </div>
-        </div>
+<div id="login">
+  <a id="loginBtn" href="#">Login with Discord</a>
+</div>
 
-        <div class="sidebar-actions">
-          <a class="btn btn-primary" id="loginBtn" href="#">Login with Discord</a>
-          <button class="btn btn-ghost" id="logoutBtn" hidden>Logout</button>
-          <a class="btn btn-secondary" id="inviteBtn" href="#" target="_blank" rel="noreferrer">Invite bot</a>
-        </div>
+<div id="panel" style="display:none;">
+  <h2>Servers</h2>
+  <select id="guilds"></select>
 
-        <div class="search-box">
-          <input id="guildSearch" type="search" placeholder="Search your servers..." />
-        </div>
+  <h3>Settings</h3>
 
-        <section class="guild-list" id="guildList"></section>
-      </aside>
+  <label>Prefix</label>
+  <input id="prefix" type="text"/>
 
-      <section class="content">
-        <header class="hero glass">
-          <div>
-            <p class="eyebrow">Global bot dashboard</p>
-            <h2>Manage every server from one place</h2>
-            <p class="hero-text">
-              Change per-guild settings, toggle modules, and keep the bot consistent across all the servers that use it.
-            </p>
-          </div>
+  <button onclick="saveSettings()">Save</button>
+</div>
 
-          <div class="hero-stats">
-            <article class="stat-card">
-              <span>Accessible guilds</span>
-              <strong id="guildCount">0</strong>
-            </article>
-            <article class="stat-card">
-              <span>Session</span>
-              <strong id="sessionState">Offline</strong>
-            </article>
-            <article class="stat-card">
-              <span>Dashboard</span>
-              <strong>Live</strong>
-            </article>
-          </div>
-        </header>
+<script src="config.js"></script>
+<script src="assets/app.js"></script>
 
-        <section id="emptyState" class="empty-state glass">
-          <h3>Log in to load your servers</h3>
-          <p>Once authenticated, you will see only the guilds where you can manage Kaelion.</p>
-        </section>
-
-        <section id="dashboardGrid" class="dashboard-grid hidden">
-          <div class="panel glass">
-            <div class="panel-header">
-              <div>
-                <p class="eyebrow">Selected server</p>
-                <h3 id="selectedGuildName">No guild selected</h3>
-              </div>
-              <span class="status-pill" id="selectedGuildStatus">—</span>
-            </div>
-
-            <div class="guild-meta">
-              <div class="guild-icon" id="guildIcon">#</div>
-              <div>
-                <p id="guildSubtitle">Choose a server from the sidebar</p>
-                <p class="muted" id="guildPermissions">Permissions: —</p>
-              </div>
-            </div>
-
-            <div class="toolbar">
-              <button class="btn btn-secondary" id="reloadGuildBtn">Reload</button>
-              <button class="btn btn-primary" id="saveBtn" disabled>Save changes</button>
-            </div>
-          </div>
-
-          <div class="panel glass">
-            <div class="panel-header">
-              <div>
-                <p class="eyebrow">Core settings</p>
-                <h3>General & automation</h3>
-              </div>
-            </div>
-
-            <form id="settingsForm" class="settings-form">
-              <div class="field-grid">
-                <label>
-                  <span>Prefix</span>
-                  <input name="prefix" type="text" maxlength="16" placeholder="," />
-                </label>
-                <label>
-                  <span>Language</span>
-                  <input name="language" type="text" maxlength="16" placeholder="en" />
-                </label>
-                <label>
-                  <span>Timezone</span>
-                  <input name="timezone" type="text" maxlength="64" placeholder="Europe/Madrid" />
-                </label>
-                <label>
-                  <span>Guild name</span>
-                  <input name="guild_name" type="text" maxlength="128" placeholder="Server name" />
-                </label>
-              </div>
-
-              <div class="field-grid two-col">
-                <label>
-                  <span>Welcome channel ID</span>
-                  <input name="welcome_channel_id" type="number" placeholder="1234567890" />
-                </label>
-                <label>
-                  <span>Goodbye channel ID</span>
-                  <input name="goodbye_channel_id" type="number" placeholder="1234567890" />
-                </label>
-                <label>
-                  <span>Mod-log channel ID</span>
-                  <input name="modlog_channel_id" type="number" placeholder="1234567890" />
-                </label>
-                <label>
-                  <span>Announcements channel ID</span>
-                  <input name="announcements_channel_id" type="number" placeholder="1234567890" />
-                </label>
-                <label>
-                  <span>Suggestions channel ID</span>
-                  <input name="suggestions_channel_id" type="number" placeholder="1234567890" />
-                </label>
-                <label>
-                  <span>Welcome role ID</span>
-                  <input name="welcome_role_id" type="number" placeholder="1234567890" />
-                </label>
-              </div>
-
-              <label>
-                <span>Welcome message</span>
-                <textarea name="welcome_message" rows="3" placeholder="Welcome {user} to {guild}!"></textarea>
-              </label>
-
-              <label>
-                <span>Goodbye message</span>
-                <textarea name="goodbye_message" rows="3" placeholder="Goodbye {user}."></textarea>
-              </label>
-
-              <div class="toggle-grid">
-                <label class="toggle"><input name="welcome_enabled" type="checkbox" /> <span>Welcome system</span></label>
-                <label class="toggle"><input name="goodbye_enabled" type="checkbox" /> <span>Goodbye system</span></label>
-                <label class="toggle"><input name="modlog_enabled" type="checkbox" /> <span>Mod logs</span></label>
-                <label class="toggle"><input name="logging_enabled" type="checkbox" /> <span>Event logging</span></label>
-                <label class="toggle"><input name="automod_enabled" type="checkbox" /> <span>AutoMod</span></label>
-                <label class="toggle"><input name="anti_links" type="checkbox" /> <span>Anti-links</span></label>
-                <label class="toggle"><input name="anti_spam" type="checkbox" /> <span>Anti-spam</span></label>
-                <label class="toggle"><input name="anti_mention_spam" type="checkbox" /> <span>Anti-mention spam</span></label>
-                <label class="toggle"><input name="anti_mass_mention" type="checkbox" /> <span>Anti mass-mention</span></label>
-                <label class="toggle"><input name="levels_enabled" type="checkbox" /> <span>Levels</span></label>
-                <label class="toggle"><input name="economy_enabled" type="checkbox" /> <span>Economy</span></label>
-                <label class="toggle"><input name="security_enabled" type="checkbox" /> <span>Security</span></label>
-                <label class="toggle"><input name="shift_enabled" type="checkbox" /> <span>Shifts</span></label>
-                <label class="toggle"><input name="invites_enabled" type="checkbox" /> <span>Invites</span></label>
-                <label class="toggle"><input name="autorole_enabled" type="checkbox" /> <span>Autorole</span></label>
-              </div>
-
-              <label>
-                <span>Custom JSON settings</span>
-                <textarea name="custom_json" rows="8" placeholder='{"extra": true}'></textarea>
-              </label>
-            </form>
-          </div>
-
-          <div class="panel glass">
-            <div class="panel-header">
-              <div>
-                <p class="eyebrow">Live activity</p>
-                <h3>Recent changes</h3>
-              </div>
-            </div>
-            <div class="activity-list" id="activityList"></div>
-          </div>
-        </section>
-      </section>
-    </main>
-
-    <script src="./config.js"></script>
-    <script src="./assets/app.js"></script>
-  </body>
+</body>
 </html>
