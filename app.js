@@ -51,3 +51,13 @@ async function saveSettings() {
 
   alert("Saved!");
 }
+window.addEventListener("load", async () => {
+  const res = await fetch("https://kaelion.duckdns.org/api/me", {
+    credentials: "include"
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    console.log("LOGGED IN:", data);
+  }
+});
