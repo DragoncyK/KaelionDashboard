@@ -1,14 +1,45 @@
 body {
+  margin: 0;
+  font-family: Arial;
   background: #0f0f0f;
   color: white;
-  font-family: Arial;
-  text-align: center;
 }
 
-input, select {
-  padding: 8px;
-  margin: 10px;
+#login-section {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
+
 button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #1a1a1a;
   padding: 10px;
+}
+
+.guild {
+  padding: 10px;
+  margin: 5px 0;
+  background: #2a2a2a;
+  cursor: pointer;
+}
+
+.guild:hover {
+  background: #3a3a3a;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
 }
