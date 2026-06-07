@@ -2,19 +2,24 @@ const API = "https://kaelion.duckdns.org";
 
 let currentGuild = null;
 
-// LOGIN BUTTON
+// LOGIN
 document.getElementById("loginBtn").onclick = () => {
   window.location.href = `${API}/auth/login`;
 };
 
-// ON LOAD
+// INIT
 window.onload = async () => {
   const me = await getMe();
 
-  if (me?.authenticated) {
-    showDashboard(me.user);
-    loadGuilds();
-  }
+  if (!me?.authenticated) return;
+
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+
+  document.getElementById("user").innerText =
+    `Welcome ${me.user.username}`;
+
+  loadGuilds();
 };
 
 // GET USER
@@ -27,16 +32,7 @@ async function getMe() {
   return await res.json();
 }
 
-// SHOW DASHBOARD
-function showDashboard(user) {
-  document.getElementById("login-section").style.display = "none";
-  document.getElementById("dashboard").style.display = "block";
-
-  document.getElementById("user").innerText =
-    `Logged as ${user.username}`;
-}
-
-// LOAD GUILDS
+// LOAD SERVERS
 async function loadGuilds() {
   const res = await fetch(`${API}/api/guilds`, {
     credentials: "include"
@@ -58,7 +54,7 @@ async function loadGuilds() {
   });
 }
 
-// OPEN GUILD
+// OPEN SERVER
 async function openGuild(id) {
   currentGuild = id;
 
@@ -70,13 +66,17 @@ async function openGuild(id) {
 
   document.getElementById("prefix").value =
     data.guild.settings.prefix;
+
+  document.getElementById("welcome").checked =
+    data.guild.settings.welcome_enabled;
+
+  document.getElementById("logs").checked =
+    data.guild.settings.logging_enabled;
 }
 
-// SAVE GUILD
+// SAVE
 document.getElementById("saveBtn").onclick = async () => {
   if (!currentGuild) return;
-
-  const prefix = document.getElementById("prefix").value;
 
   await fetch(`${API}/api/guilds/${currentGuild}`, {
     method: "PATCH",
@@ -84,7 +84,11 @@ document.getElementById("saveBtn").onclick = async () => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ prefix })
+    body: JSON.stringify({
+      prefix: document.getElementById("prefix").value,
+      welcome_enabled: document.getElementById("welcome").checked,
+      logging_enabled: document.getElementById("logs").checked
+    })
   });
 
   alert("Saved!");
