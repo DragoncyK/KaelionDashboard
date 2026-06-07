@@ -1,45 +1,80 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: #0f0f0f;
+  background: #0b0b0f;
   color: white;
 }
 
-#login-section {
-  display: flex;
+.center {
   height: 100vh;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-button {
-  padding: 10px 20px;
-  cursor: pointer;
+.hidden {
+  display: none;
 }
 
-.layout {
+.btn {
+  padding: 10px 20px;
+  background: #5865f2;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.btn:hover {
+  background: #4752c4;
+}
+
+#app {
   display: flex;
   height: 100vh;
 }
 
 .sidebar {
-  width: 250px;
-  background: #1a1a1a;
+  width: 240px;
+  background: #111218;
   padding: 10px;
 }
 
 .guild {
   padding: 10px;
   margin: 5px 0;
-  background: #2a2a2a;
+  background: #1b1d25;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .guild:hover {
-  background: #3a3a3a;
+  background: #2a2d3a;
 }
 
-.content {
+.main {
   flex: 1;
   padding: 20px;
+}
+
+.card {
+  background: #161821;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  background: #0f1117;
+  border: 1px solid #2a2d3a;
+  color: white;
+}
+
+.switch {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
 }
