@@ -3,30 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Kaelion Dashboard</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>Kaelion Dashboard</h1>
+  <div id="login-section">
+    <button id="loginBtn">Login with Discord</button>
+  </div>
 
-<div id="login">
-  <a id="loginBtn" href="#">Login with Discord</a>
-</div>
+  <div id="dashboard" style="display:none;">
+    
+    <h2 id="user"></h2>
 
-<div id="panel" style="display:none;">
-  <h2>Servers</h2>
-  <select id="guilds"></select>
+    <div class="layout">
 
-  <h3>Settings</h3>
+      <div id="guilds" class="sidebar"></div>
 
-  <label>Prefix</label>
-  <input id="prefix" type="text"/>
+      <div class="content">
+        <h3>Guild Settings</h3>
 
-  <button onclick="saveSettings()">Save</button>
-</div>
+        <input id="prefix" placeholder="prefix">
+        <br><br>
 
-<script src="config.js"></script>
-<script src="assets/app.js"></script>
+        <button id="saveBtn">Save</button>
+      </div>
 
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
