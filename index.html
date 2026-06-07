@@ -8,30 +8,45 @@
 
 <body>
 
-  <div id="login-section">
-    <button id="loginBtn">Login with Discord</button>
+<div id="login" class="center">
+  <button id="loginBtn" class="btn">Login with Discord</button>
+</div>
+
+<div id="app" class="hidden">
+
+  <div class="sidebar">
+    <h2>Servers</h2>
+    <div id="guilds"></div>
   </div>
 
-  <div id="dashboard" style="display:none;">
-    
+  <div class="main">
+
     <h2 id="user"></h2>
 
-    <div class="layout">
+    <div class="card">
+      <h3>Settings</h3>
 
-      <div id="guilds" class="sidebar"></div>
+      <label>Prefix</label>
+      <input id="prefix" type="text">
 
-      <div class="content">
-        <h3>Guild Settings</h3>
-
-        <input id="prefix" placeholder="prefix">
-        <br><br>
-
-        <button id="saveBtn">Save</button>
+      <div class="switch">
+        <label>Welcome</label>
+        <input id="welcome" type="checkbox">
       </div>
 
+      <div class="switch">
+        <label>Logs</label>
+        <input id="logs" type="checkbox">
+      </div>
+
+      <button id="saveBtn" class="btn">Save changes</button>
+
     </div>
+
   </div>
 
-  <script src="app.js"></script>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
